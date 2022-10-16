@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { RouterModule } from '@angular/router';
-
+import { ReactiveFormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
+
 import { AppComponent } from './app.component';
 import { CartComponent } from './cart/cart.component';
 import { DetailComponent } from './product/detail/detail.component';
@@ -14,11 +14,7 @@ import { AlertComponent } from './product/alert/alert.component';
     imports: [
         BrowserModule,
         AppRoutingModule,
-        RouterModule.forRoot([
-            { path: '', component: ListComponent },
-            { path: 'product/:id', component: DetailComponent },
-            { path: 'cart', component: CartComponent },
-        ]),
+        ReactiveFormsModule,
     ],
     declarations: [
         AppComponent,

@@ -11,28 +11,28 @@ export interface Item extends Product
 })
 export class CartService
 {
-    private items: Item[] = [];
+    #items: Item[] = [];
 
     constructor()
     {
-        this.items = JSON.parse(sessionStorage.getItem('cart') ?? '[]') as Item[];
+        this.#items = JSON.parse(sessionStorage.getItem('cart') ?? '[]') as Item[];
     }
 
     addToCart(product: Product, quantity: number = 1)
     {
-        this.items.push({ ...product, quantity });
+        this.#items.push({ ...product, quantity });
 
         this.persist();
     }
 
-    getItems(): Item[]
+    get items(): Item[]
     {
-        return this.items;
+        return this.#items;
     }
 
-    clearCart(): void
+    clear(): void
     {
-        this.items = [];
+        this.#items = [];
 
         this.persist();
     }
