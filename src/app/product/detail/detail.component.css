@@ -1,0 +1,59 @@
+:host
+{
+    container: product-detail / inline-size;
+}
+
+.product-detail
+{
+    display: grid;
+    grid: repeat(3, auto) 1fr / 1fr auto;
+    grid-template-areas:
+        'image title'
+        'image price'
+        'image description'
+        'image action'
+    ;
+    gap: 1em;
+    place-items: start;
+}
+
+.product-detail > .image
+{
+    grid-area: image;
+    inline-size: 100%;
+    block-size: 100%;
+    object-fit: contain;
+}
+
+.product-detail > .title
+{
+    grid-area: title;
+}
+
+.product-detail > .price
+{
+    grid-area: price;
+}
+
+.product-detail > .description
+{
+    grid-area: description;
+}
+
+.product-detail > .action
+{
+    grid-area: action;
+}
+
+@container product-detail (inline-size > 20em)
+{
+    .product-detail
+    {
+        background-color: pink;
+    }
+
+    .title
+    {
+        background-color: cornflowerblue;
+    }
+}

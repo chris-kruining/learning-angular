@@ -5,6 +5,7 @@ import { AppRoutingModule } from './app-routing.module';
 
 import { AppComponent } from './app.component';
 import { CartComponent } from './cart/cart.component';
+import { ProductService } from './product.service';
 import { DetailComponent } from './product/detail/detail.component';
 import { ListComponent } from './product/list/list.component';
 import { NavigationComponent } from './layout/navigation/navigation.component';
@@ -24,6 +25,7 @@ import { AlertComponent } from './product/alert/alert.component';
         NavigationComponent,
         AlertComponent,
     ],
+    // providers: [ ProductService ],
     bootstrap: [ AppComponent ],
 })
 export class AppModule

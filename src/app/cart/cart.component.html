@@ -3,7 +3,7 @@
 </p>
 
 <div class="cart-item" *ngFor="let item of items">
-    <h1>{{ item.name }} <b>{{ item.price | currency }}</b></h1>
+    <h1>{{ item.title }} <b>{{ item.price | currency }}</b></h1>
     <input [value]="item.quantity">
 </div>
 

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Product } from './products';
+import { Product } from './product.service';
 
 export interface Item extends Product
 {
@@ -18,26 +18,26 @@ export class CartService
         this.#items = JSON.parse(sessionStorage.getItem('cart') ?? '[]') as Item[];
     }
 
+    get items(): Item[]
+    {
+        return this.#items;
+    }
+
     addToCart(product: Product, quantity: number = 1)
     {
         this.#items.push({ ...product, quantity });
 
-        this.persist();
-    }
-
-    get items(): Item[]
-    {
-        return this.#items;
+        this.#persist();
     }
 
     clear(): void
     {
         this.#items = [];
 
-        this.persist();
+        this.#persist();
     }
 
-    private persist(): void
+    #persist(): void
     {
         sessionStorage.setItem('cart', JSON.stringify(this.items));
     }

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Product, products } from '../../products';
+import { Product, ProductService } from '../../product.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CartService } from '../../cart.service';
 
@@ -16,14 +16,14 @@ export class DetailComponent implements OnInit
         private router: Router,
         private route: ActivatedRoute,
         private cartService: CartService,
+        private productService: ProductService,
     ) {}
 
-    ngOnInit(): void
+    public async ngOnInit(): Promise<void>
     {
-        const routeParams = this.route.snapshot.paramMap;
-        const productId = Number(routeParams.get('id'));
+        const id = Number(this.route.snapshot.paramMap.get('id'));
 
-        this.product = products.find((p) => p.id === productId);
+        this.product = (await this.productService.products).find(p => p.id === id);
     }
 
     addToCart(product: Product)

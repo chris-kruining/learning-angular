@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { CartService, Item } from '../cart.service';
 
 @Component({
@@ -9,17 +9,15 @@ import { CartService, Item } from '../cart.service';
 })
 export class CartComponent
 {
-    items!: Item[];
-
-    checkoutForm = this.formBuilder.group({
-        name: '',
-        address: ''
-    });
+    checkoutForm: FormGroup;
+    items: Item[];
 
     constructor(
         private cartService: CartService,
         private formBuilder: FormBuilder,
     ) {
+        this.checkoutForm = this.formBuilder.group({ name: '', address: '' })
+
         this.items = this.cartService.items;
     }
 
