@@ -9,7 +9,7 @@
 .product-list > .product-list-item
 {
     display: grid;
-    grid: 15em 5em 10em auto / 100%;
+    grid: 15em 2em 5em 10em auto / 100%;
 }
 
 .product-list > .product-list-item > img
@@ -19,11 +19,17 @@
     object-fit: contain;
 }
 
+.product-list > .product-list-item > .price
+{
+    justify-self: end;
+}
+
 .product-list > .product-list-item > .buttons
 {
     display: grid;
     grid-auto-flow: column;
     justify-content: end;
+    gap: .5em;
     inline-size: 100%;
     block-size: 100%;
 }

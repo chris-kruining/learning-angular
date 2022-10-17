@@ -6,7 +6,7 @@ import { CartService } from '../../cart.service';
 @Component({
     selector: 'app-product-detail',
     templateUrl: './detail.component.html',
-    styleUrls: [ './detail.component.css' ],
+    styleUrls: [ '../../../styles.css', './detail.component.css' ],
     encapsulation: ViewEncapsulation.ShadowDom,
 })
 export class DetailComponent implements OnInit
