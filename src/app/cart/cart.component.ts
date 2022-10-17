@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ViewEncapsulation } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { CartService, Item } from '../cart.service';
 
@@ -6,6 +6,7 @@ import { CartService, Item } from '../cart.service';
     selector: 'app-cart',
     templateUrl: './cart.component.html',
     styleUrls: [ './cart.component.css' ],
+    encapsulation: ViewEncapsulation.ShadowDom,
 })
 export class CartComponent
 {

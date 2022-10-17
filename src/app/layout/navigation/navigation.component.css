@@ -1,0 +1,15 @@
+:host {
+    display: grid;
+    grid-auto-flow: column;
+    align-content: center;
+    justify-content: space-between;
+    inline-size: 100%;
+    block-size: 5em;
+    padding: 1em;
+    background-color: #1976d2;
+}
+
+:host h1 {
+    color: white;
+    margin: 0;
+}

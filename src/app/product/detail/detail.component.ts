@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { Product, ProductService } from '../../product.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CartService } from '../../cart.service';
@@ -7,6 +7,7 @@ import { CartService } from '../../cart.service';
     selector: 'app-product-detail',
     templateUrl: './detail.component.html',
     styleUrls: [ './detail.component.css' ],
+    encapsulation: ViewEncapsulation.ShadowDom,
 })
 export class DetailComponent implements OnInit
 {

@@ -1,0 +1,22 @@
+:host
+{
+    display: grid;
+    grid-template-columns: [full-start] 2vw [main-start] 1fr [main-end] 2vw [full-end];
+    align-content: start;
+    min-height: 100vh;
+}
+
+:host > *
+{
+    grid-column: main;
+}
+
+:host > app-layout-navigation
+{
+    grid-column: full;
+}
+
+router-outlet
+{
+    display: none;
+}

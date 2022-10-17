@@ -1,10 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { Product, ProductService } from '../../product.service';
 
 @Component({
     selector: 'app-list',
     templateUrl: './list.component.html',
-    styleUrls: [ './list.component.css' ],
+    styleUrls: [ '../../../styles.css', './list.component.css' ],
+    encapsulation: ViewEncapsulation.ShadowDom,
 })
 export class ListComponent implements OnInit
 {

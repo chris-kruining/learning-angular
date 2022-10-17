@@ -1,18 +1,12 @@
-:host
+.container
 {
+    display: grid;
     container: product-detail / inline-size;
 }
 
 .product-detail
 {
     display: grid;
-    grid: repeat(3, auto) 1fr / 1fr auto;
-    grid-template-areas:
-        'image title'
-        'image price'
-        'image description'
-        'image action'
-    ;
     gap: 1em;
     place-items: start;
 }
@@ -22,6 +16,7 @@
     grid-area: image;
     inline-size: 100%;
     block-size: 100%;
+    max-block-size: 40em;
     object-fit: contain;
 }
 
@@ -45,15 +40,31 @@
     grid-area: action;
 }
 
-@container product-detail (inline-size > 20em)
+@container product-detail (inline-size <= 40em)
 {
     .product-detail
     {
-        background-color: pink;
+        grid: repeat(4, auto) 1fr / 100%;
+        grid-template-areas:
+            'image'
+            'title'
+            'price'
+            'action'
+            'description'
+        ;
     }
+}
 
-    .title
+@container product-detail (inline-size > 40em)
+{
+    .product-detail
     {
-        background-color: cornflowerblue;
+        grid: repeat(3, auto) 1fr / minmax(20em, 1fr) auto;
+        grid-template-areas:
+            'image title'
+            'image price'
+            'image description'
+            'image action'
+        ;
     }
 }
