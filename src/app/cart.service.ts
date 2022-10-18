@@ -23,9 +23,25 @@ export class CartService
         return this.#items;
     }
 
-    addToCart(product: Product, quantity: number = 1)
+    add(product: Product, quantity: number = 1)
     {
-        this.#items.push({ ...product, quantity });
+        const existing = this.#items.find(p => p.id === product.id);
+
+        if (existing === undefined)
+        {
+            this.#items.push({ ...product, quantity });
+        }
+        else
+        {
+            existing.quantity += quantity;
+        }
+
+        this.#persist();
+    }
+
+    remove(id: Product['id']): void
+    {
+        this.#items = this.#items.filter(p => p.id !== id);
 
         this.#persist();
     }

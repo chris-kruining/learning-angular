@@ -50,8 +50,7 @@
             'title'
             'price'
             'action'
-            'description'
-        ;
+            'description';
     }
 }
 
@@ -64,7 +63,6 @@
             'image title'
             'image price'
             'image description'
-            'image action'
-        ;
+            'image action';
     }
 }

@@ -1,15 +1,15 @@
 import { TestBed } from '@angular/core/testing';
 
-import { ProductService } from './product.service';
+import { MediaQueryService } from './media-query.service';
 
-describe('ProductService', () =>
+describe('MediaQueryService', () =>
 {
-    let service: ProductService;
+    let service: MediaQueryService;
 
     beforeEach(() =>
     {
         TestBed.configureTestingModule({});
-        service = TestBed.inject(ProductService);
+        service = TestBed.inject(MediaQueryService);
     });
 
     it('should be created', () =>

@@ -1,61 +1,147 @@
-* {
-    font-family: 'Roboto', Arial, sans-serif;
-    color: #616161;
+@media screen and (prefers-color-scheme: light), print
+{
+    :root
+    {
+        --plain-bg-rgb: 255 255 250;
+        --plain-fg-rgb: 34 34 34;
+
+        --primary-bg-rgb: 65 112 129;
+        --primary-fg-rgb: 34 34 34;
+    }
+
+    @media screen and (prefers-contrast: more)
+    {
+        :root
+        {
+            --plain-bg-rgb: 255 255 255;
+            --plain-fg-rgb: 0 0 0;
+
+            --primary-bg-rgb: 65 112 129;
+            --primary-fg-rgb: 34 34 34;
+        }
+    }
+
+    @media screen and (prefers-contrast: less)
+    {
+        :root
+        {
+            --plain-bg-rgb: 230 230 225;
+            --plain-fg-rgb: 50 50 50;
+
+            --primary-bg-rgb: 65 112 129;
+            --primary-fg-rgb: 34 34 34;
+        }
+    }
+}
+
+@media screen and (prefers-color-scheme: dark)
+{
+    :root
+    {
+        --plain-bg-rgb: 34 34 34;
+        --plain-fg-rgb: 255 255 250;
+
+        --primary-bg-rgb: 65 112 129;
+        --primary-fg-rgb: 34 34 34;
+    }
+
+    @media (prefers-contrast: more)
+    {
+        :root
+        {
+            --plain-bg-rgb: 0 0 0;
+            --plain-fg-rgb: 255 255 255;
+
+            --primary-bg-rgb: 65 112 129;
+            --primary-fg-rgb: 34 34 34;
+        }
+    }
+
+    @media (prefers-contrast: less)
+    {
+        :root
+        {
+            --plain-bg-rgb: 50 50 50;
+            --plain-fg-rgb: 230 230 225;
+
+            --primary-bg-rgb: 65 112 129;
+            --primary-fg-rgb: 34 34 34;
+        }
+    }
+}
+
+:root
+{
+    --plain-bg: rgb(var(--plain-bg-rgb));
+    --plain-fg: rgb(var(--plain-fg-rgb));
+
+    --primary-bg: rgb(var(--primary-bg-rgb));
+    --primary-fg: rgb(var(--primary-fg-rgb));
+
+    --radius: .5em;
+}
+
+
+
+
+*
+{
     box-sizing: border-box;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
 }
 
-body {
+body
+{
     margin: 0;
-}
-
-.container {
-    display: flex;
-    flex-direction: row;
+    overflow-x: clip;
+    background-color: var(--plain-bg);
+    color: var(--plain-fg);
+    font-family: 'Roboto', Arial, sans-serif;
 }
 
 /* Text */
 
-h1 {
-    font-size: 32px;
+h1
+{
+    font-size: 2rem;
 }
 
-h2 {
-    font-size: 20px;
+h2
+{
+    font-size: 1.25rem;
 }
 
-h1, h2 {
+h1, h2
+{
     font-weight: lighter;
 }
 
-p {
-    font-size: 14px;
+p
+{
+    font-size: .9rem;
 }
 
 /* Hyperlink */
 
-a {
+a
+{
     cursor: pointer;
-    color: #1976d2;
+    color: var(--primary-fg);
     text-decoration: none;
-}
-
-a:hover {
-    opacity: 0.8;
 }
 
 /* Input */
 
-input {
+input
+{
     font-size: 14px;
     border-radius: 2px;
     padding: 8px;
     margin-bottom: 16px;
-    border: 1px solid #BDBDBD;
+    border: 1px solid var(--plain-fg);
 }
 
-label {
+label
+{
     font-size: 12px;
     font-weight: bold;
     margin-bottom: 4px;
@@ -64,46 +150,25 @@ label {
 }
 
 /* Button */
-.button, button {
+.button, button
+{
     display: inline-flex;
+    justify-content: center;
     align-items: center;
     gap: 1em;
     padding: .5em 1em;
     border-radius: 2px;
     font-size: 14px;
     cursor: pointer;
-    background-color: #1976d2;
-    color: white;
+    background-color: var(--primary-bg);
+    color: var(--primary-fg);
     border: none;
 }
 
-.button:hover, button:hover {
-    opacity: 0.8;
-    font-weight: normal;
-}
-
-.button:disabled, button:disabled {
-    opacity: 0.5;
-    cursor: auto;
-}
-
-/* Fancy Button */
-
-.fancy-button {
-    background-color: white;
-    color: #1976d2;
-}
-
-.fancy-button i.material-icons {
-    color: #1976d2;
-    padding-right: 4px;
-}
-
-/* Navigation */
-
 /* Checkout Cart, Shipping Prices */
 
-.cart-item, .shipping-item {
+.cart-item, .shipping-item
+{
     width: 100%;
     min-width: 400px;
     max-width: 450px;
@@ -113,7 +178,7 @@ label {
     padding: 16px 32px;
     margin-bottom: 8px;
     border-radius: 2px;
-    background-color: #EEEEEE;
+    background-color: #eee;
 }
 
 fa-icon

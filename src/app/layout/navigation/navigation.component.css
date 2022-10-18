@@ -1,15 +1,30 @@
-:host {
+:host
+{
+    position: sticky;
+    inset-block-start: 0;
     display: grid;
+    grid-template-columns: repeat(auto-fill, 10em);
     grid-auto-flow: column;
     align-content: center;
+    align-items: center;
     justify-content: space-between;
     inline-size: 100%;
     block-size: 5em;
-    padding: 1em;
-    background-color: #1976d2;
+    padding: 1em 2vw;
+    background-color: var(--primary-bg);
+    color: var(--primary-fg);
+    z-index: 1000;
 }
 
-:host h1 {
-    color: white;
-    margin: 0;
+:host a:last-of-type
+{
+    grid-column: -2;
+}
+
+@media print
+{
+    :host
+    {
+        display: none;
+    }
 }

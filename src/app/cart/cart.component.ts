@@ -11,21 +11,28 @@ import { CartService, Item } from '../cart.service';
 export class CartComponent
 {
     checkoutForm: FormGroup;
-    items: Item[];
 
     constructor(
         private cartService: CartService,
         private formBuilder: FormBuilder,
-    ) {
-        this.checkoutForm = this.formBuilder.group({ name: '', address: '' })
+    )
+    {
+        this.checkoutForm = this.formBuilder.group({ name: '', address: '' });
+    }
 
-        this.items = this.cartService.items;
+    get items()
+    {
+        return this.cartService.items;
+    }
+
+    remove(item: Item)
+    {
+        this.cartService.remove(item.id);
     }
 
     onSubmit(): void
     {
         this.cartService.clear();
-        this.items = [];
 
         console.warn('Your order has been submitted', this.checkoutForm.value);
 

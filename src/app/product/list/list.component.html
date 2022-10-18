@@ -1,29 +1,43 @@
-<h2>Products</h2>
-
 <main class="product-list">
-    <a
-        class="product-list-item"
-        [routerLink]="['/product', product.id]"
-        [title]="product.title + ' details'"
-        *ngFor="let product of products"
-    >
-        <img [src]="product.image" />
+    <div class="inner">
+        <a
+            *ngFor="let product of products"
+            [routerLink]="['/product', product.id]"
+            [title]="product.title + ' details'"
+            class="product-list-item"
+            style="--price: '{{ product.price | currency }}'; --image: url({{ product.image }}); --origin: '{{ location.origin }}';"
+        >
+            <img
+                [alt]="product.title"
+                [src]="showImages ? product.image : '#'"
+            />
 
-        <h3 class="price">{{ product.price | currency }}</h3>
+            <section>
+                <span class="title">{{ product.title }}</span>
 
-        <h3>{{ product.title }}</h3>
+                <div class="counters">
+                    <span class="value">{{ product.rating.rate }}</span>
+                    <p>Rating</p>
 
-        <p *ngIf="product.description">
-            {{ product.description }}
-        </p>
+                    <span class="value">{{ product.rating.count }}</span>
+                    <p>Sold</p>
+                </div>
 
-        <div class="buttons">
-            <button (click)="share(product)">Share</button>
+                <button
+                    (click)="addToCart(product); $event.preventDefault(); $event.stopPropagation();"
+                    type="button"
+                >Buy
+                </button>
 
-            <app-product-alert
-                (notify)="onNotify($event)"
-                [product]="product"
-            ></app-product-alert>
-        </div>
-    </a>
+                <footer (click)="$event.preventDefault(); $event.stopPropagation();">
+                    <button (click)="share(product)">Share</button>
+
+                    <app-product-alert
+                        (notify)="onNotify($event)"
+                        [product]="product"
+                    ></app-product-alert>
+                </footer>
+            </section>
+        </a>
+    </div>
 </main>

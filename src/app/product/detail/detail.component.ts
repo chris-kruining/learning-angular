@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
-import { Product, ProductService } from '../../product.service';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { CartService } from '../../cart.service';
+import { Product, ProductService } from '../../product.service';
 
 @Component({
     selector: 'app-product-detail',
@@ -11,26 +11,27 @@ import { CartService } from '../../cart.service';
 })
 export class DetailComponent implements OnInit
 {
-    product: Product|undefined;
+    product?: Product;
 
     constructor(
-        private router: Router,
         private route: ActivatedRoute,
         private cartService: CartService,
         private productService: ProductService,
-    ) {}
+    )
+    {
+    }
 
     public async ngOnInit(): Promise<void>
     {
         const id = Number(this.route.snapshot.paramMap.get('id'));
 
-        this.product = (await this.productService.products).find(p => p.id === id);
+        this.product = (
+            await this.productService.products
+        ).find(p => p.id === id);
     }
 
     addToCart(product: Product)
     {
-        this.cartService.addToCart(product);
-
-        this.router.navigate([ '/cart' ]);
+        this.cartService.add(product);
     }
 }

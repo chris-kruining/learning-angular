@@ -18,7 +18,7 @@ export interface Product
 }
 
 @Injectable({
-  providedIn: 'root'
+    providedIn: 'root',
 })
 export class ProductService
 {
