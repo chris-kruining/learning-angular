@@ -1,0 +1,333 @@
+@property --padding
+{
+    syntax: '<length>';
+    inherits: false;
+    initial-value: 2em;
+}
+
+@property --count
+{
+    syntax: '<integer>';
+    inherits: false;
+    initial-value: 20;
+}
+
+@media screen
+{
+
+    .product-list
+    {
+        --padding: 2em;
+        --count: 20;
+        display: grid;
+        pointer-events: none;
+    }
+
+    .product-list > .inner
+    {
+        position: relative;
+        display: grid;
+        grid-auto-flow: column;
+        grid: auto / repeat(auto-fill, 20em);
+        justify-content: center;
+        align-items: start;
+        justify-self: center;
+        column-gap: calc(5 * var(--padding));
+        inline-size: 100%;
+        padding-inline: calc(5 * var(--padding));
+        padding-block-start: calc(6 * var(--padding));
+        padding-block-end: calc(4 * var(--padding));
+        margin-inline: calc(-1 * var(--padding));
+        overflow-y: hidden;
+        pointer-events: auto;
+    }
+
+    :host > a
+    {
+        display: grid;
+        grid: 100% / 100%;
+        align-items: start;
+        justify-items: center;
+        position: relative;
+        inline-size: 15em;
+        aspect-ratio: 3 / 5;
+        transform: translateY(calc(-2 * var(--padding)));
+        z-index: 1;
+        color: var(--plain-fg);
+    }
+
+    :host > a::before
+    {
+        content: '';
+        display: block;
+        position: absolute;
+        left: 0;
+        top: 0;
+        inline-size: 100%;
+        block-size: 100%;
+        transform: translateY(calc(2 * var(--padding)));
+        z-index: -2;
+    }
+
+    :host > a::after
+    {
+        content: var(--price);
+        display: grid;
+        place-items: center;
+        position: absolute;
+        right: calc(.5 * var(--padding));
+        top: 0;
+        inline-size: 5em;
+        aspect-ratio: 2 / 1.5;
+        padding-bottom: .25em;
+        font-weight: 900;
+        background-color: var(--plain-bg);
+        transform: translateX(calc(1.5 * var(--padding)));
+        clip-path: polygon(0 0, 100% 0, 100% 100%, 50% calc(100% - .5em), 0 100%);
+        pointer-events: none;
+        z-index: 2;
+    }
+
+    :host > a > img
+    {
+        grid-area: 1 / 1;
+        inline-size: 100%;
+        block-size: 100%;
+        padding: 1em;
+        border-radius: .5em;
+        transform-origin: 50% 0;
+        box-shadow: 0 0 1em #000;
+        object-fit: contain;
+        user-select: none;
+        transform: scale(.8) translateY(calc(-4 * var(--padding)));
+        z-index: 1;
+    }
+
+    :host > a > img[alt]:after
+    {
+        content: attr(alt);
+        position: absolute;
+        inset-inline-start: 0;
+        inset-block-start: 0;
+        display: grid;
+        place-items: center;
+        inline-size: 100%;
+        block-size: 100%;
+        padding: .625em;
+        font-size: 1.6em;
+        text-align: center;
+        background: /* Dot */ radial-gradient(circle at 25% 30%, #7772, #7774 1em, transparent 1em),
+            /* Dot */ radial-gradient(circle at 85% 15%, #7772, #7774 1em, transparent 1em),
+            /* Bottom fade */ linear-gradient(165deg, transparent 60%, #555 60%, var(--plain-bg)),
+            /* wave dark part */ radial-gradient(ellipse 52% 2.25em at .5em calc(50% - 1em), var(--plain-bg) 100%, transparent 100%),
+            /* wave light part */ radial-gradient(ellipse 52% 2.25em at calc(100% - .5em) calc(50% + 1em), #555 100%, transparent 100%),
+            /* Base */ linear-gradient(to bottom, var(--plain-bg) 50%, #555 50%);
+        box-sizing: border-box;
+    }
+
+    :host > a > section
+    {
+        --offset: calc(1.5 * var(--padding));
+        grid-area: 1 / 1;
+        display: grid;
+        grid-template-columns: 100%;
+        align-content: end;
+        gap: 1.5em;
+        position: relative;
+        inline-size: calc(100% + (3 * var(--padding)));
+        block-size: calc(100% + (4 * var(--padding)));
+        padding: calc(.5 * var(--padding));
+        background-color: var(--plain-bg);
+        border-radius: .5em;
+        transform: translate3d(0, 0, 0);
+        clip-path: inset(-1em);
+        box-shadow: 0 0 1em #000;
+    }
+
+    :host > a:focus-within > section
+    {
+        outline: 1px solid var(--plain-fg);
+        outline-offset: .75em;
+    }
+
+    :host > a > section > .title
+    {
+        text-align: center;
+        font-size: 1.6em;
+        font-weight: bold;
+    }
+
+    :host > a > section > .counters
+    {
+        position: relative;
+        column-count: 2;
+        text-align: center;
+        font-weight: bold;
+    }
+
+    :host > a > section > .counters > .value
+    {
+        font-size: 1.4em;
+    }
+
+    :host > a > section > .counters > :is(.value, p)
+    {
+        margin: 0;
+    }
+
+    :host > a > section > .counters::after
+    {
+        content: '';
+        position: absolute;
+        display: block;
+        inline-size: 1px;
+        block-size: 100%;
+        left: 50%;
+        top: 0;
+        background-color: var(--plain-fg);
+    }
+
+    :host > a > section > a
+    {
+        display: grid;
+        grid-template-areas: 'icon';
+        grid-auto-flow: column;
+        justify-content: center;
+        gap: .5em;
+        padding: .25em 1em;
+        background-color: var(--primary-bg);
+        color: var(--primary-fg);
+        border: .1em solid transparent;
+        border-radius: var(--radius);
+        cursor: pointer;
+        line-height: 2em;
+        font-family: inherit;
+        font-size: 1em;
+        will-change: background-color;
+        transition: background-color .3s ease-in-out;
+    }
+
+    :host > a > section > button
+    {
+        font-size: 1.2em;
+    }
+
+    :host > a > section > footer
+    {
+        display: grid;
+        grid-auto-flow: column;
+        justify-content: end;
+    }
+
+    :host > a > section > footer button
+    {
+        background-color: transparent;
+        color: inherit;
+    }
+
+    @media (prefers-reduced-data: no-preference)
+    {
+        :host > a > img
+        {
+            background: #fff;
+        }
+
+        :host > a > section
+        {
+            background: linear-gradient(to top, var(--plain-bg) 50%, rgba(var(--plain-bg-rgb) / 0)),
+            var(--image) top center / cover no-repeat,
+            var(--plain-bg);
+        }
+    }
+
+    @media (hover: none)
+    {
+        .product-list > .inner
+        {
+            scroll-snap-type: x mandatory;
+        }
+
+        :host > a
+        {
+            scroll-snap-align: center;
+        }
+    }
+
+    @media (hover)
+    {
+        .product-list > .inner
+        {
+            gap: var(--padding);
+        }
+
+        :host > a:not(:hover):not(:focus-within)
+        {
+            transform: translateY(0);
+            z-index: 0;
+            will-change: transform;
+        }
+
+        :host > a:not(:hover):not(:focus-within)::before
+        {
+            transform: translateY(0);
+            will-change: transform;
+        }
+
+        :host > a:not(:hover):not(:focus-within)::after
+        {
+            transform: translateX(0);
+            will-change: transform;
+        }
+
+        :host > a:not(:hover):not(:focus-within) > img
+        {
+            transform: scale(1) translateY(0);
+            will-change: transform;
+        }
+
+        :host > a:not(:hover):not(:focus-within) > section
+        {
+            clip-path: inset(40%);
+        }
+
+        @media (prefers-reduced-motion: no-preference)
+        {
+            :host > a
+            {
+                transition: transform .2s linear .1s, z-index 0s linear .2s;
+            }
+
+            :host > a::after
+            {
+                transition: transform .2s linear 0s;
+            }
+
+            :host > a > img
+            {
+                transition: transform .2s ease-in-out;
+            }
+
+            :host > a > section
+            {
+                transition: clip-path .3s ease-in-out .1s;
+            }
+
+            :host > a:is(:hover, :focus-within)
+            {
+                transition-delay: 0s, .3s;
+                z-index: 1;
+            }
+
+            :host > a:is(:hover, :focus-within)::after
+            {
+                transition-duration: .3s;
+                transition-delay: .1s;
+            }
+
+            :host > a:is(:hover, :focus-within) > img
+            {
+                transition-duration: .3s;
+            }
+        }
+    }
+}

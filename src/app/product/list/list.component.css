@@ -42,292 +42,11 @@
         pointer-events: auto;
     }
 
-    .product-list .product-list-item
-    {
-        display: grid;
-        grid: 100% / 100%;
-        align-items: start;
-        justify-items: center;
-        position: relative;
-        inline-size: 15em;
-        aspect-ratio: 3 / 5;
-        transform: translateY(calc(-2 * var(--padding)));
-        z-index: 1;
-        color: var(--plain-fg);
-    }
-
-    .product-list .product-list-item::before
-    {
-        content: '';
-        display: block;
-        position: absolute;
-        left: 0;
-        top: 0;
-        inline-size: 100%;
-        block-size: 100%;
-        transform: translateY(calc(2 * var(--padding)));
-        z-index: -2;
-    }
-
-    .product-list .product-list-item::after
-    {
-        content: var(--price);
-        display: grid;
-        place-items: center;
-        position: absolute;
-        right: calc(.5 * var(--padding));
-        top: 0;
-        inline-size: 5em;
-        aspect-ratio: 2 / 1.5;
-        padding-bottom: .25em;
-        font-weight: 900;
-        background-color: var(--plain-bg);
-        transform: translateX(calc(1.5 * var(--padding)));
-        clip-path: polygon(0 0, 100% 0, 100% 100%, 50% calc(100% - .5em), 0 100%);
-        pointer-events: none;
-        z-index: 2;
-    }
-
-    .product-list .product-list-item > img
-    {
-        grid-area: 1 / 1;
-        inline-size: 100%;
-        block-size: 100%;
-        padding: 1em;
-        border-radius: .5em;
-        transform-origin: 50% 0;
-        box-shadow: 0 0 1em #000;
-        object-fit: contain;
-        user-select: none;
-        transform: scale(.8) translateY(calc(-4 * var(--padding)));
-        z-index: 1;
-    }
-
-    .product-list .product-list-item > img[alt]:after
-    {
-        content: attr(alt);
-        position: absolute;
-        inset-inline-start: 0;
-        inset-block-start: 0;
-        display: grid;
-        place-items: center;
-        inline-size: 100%;
-        block-size: 100%;
-        padding: .625em;
-        font-size: 1.6em;
-        text-align: center;
-        background: /* Dot */ radial-gradient(circle at 25% 30%, #7772, #7774 1em, transparent 1em),
-            /* Dot */ radial-gradient(circle at 85% 15%, #7772, #7774 1em, transparent 1em),
-            /* Bottom fade */ linear-gradient(165deg, transparent 60%, #555 60%, var(--plain-bg)),
-            /* wave dark part */ radial-gradient(ellipse 52% 2.25em at .5em calc(50% - 1em), var(--plain-bg) 100%, transparent 100%),
-            /* wave light part */ radial-gradient(ellipse 52% 2.25em at calc(100% - .5em) calc(50% + 1em), #555 100%, transparent 100%),
-            /* Base */ linear-gradient(to bottom, var(--plain-bg) 50%, #555 50%);
-        box-sizing: border-box;
-    }
-
-    .product-list .product-list-item > section
-    {
-        --offset: calc(1.5 * var(--padding));
-        grid-area: 1 / 1;
-        display: grid;
-        grid-template-columns: 100%;
-        align-content: end;
-        gap: 1.5em;
-        position: relative;
-        inline-size: calc(100% + (3 * var(--padding)));
-        block-size: calc(100% + (4 * var(--padding)));
-        padding: calc(.5 * var(--padding));
-        background-color: var(--plain-bg);
-        border-radius: .5em;
-        transform: translate3d(0, 0, 0);
-        clip-path: inset(-1em);
-        box-shadow: 0 0 1em #000;
-    }
-
-    .product-list .product-list-item:focus-within > section
-    {
-        outline: 1px solid var(--plain-fg);
-        outline-offset: .75em;
-    }
-
-    .product-list .product-list-item > section > .title
-    {
-        text-align: center;
-        font-size: 1.6em;
-        font-weight: bold;
-    }
-
-    .product-list .product-list-item > section > .counters
-    {
-        position: relative;
-        column-count: 2;
-        text-align: center;
-        font-weight: bold;
-    }
-
-    .product-list .product-list-item > section > .counters > .value
-    {
-        font-size: 1.4em;
-    }
-
-    .product-list .product-list-item > section > .counters > :is(.value, p)
-    {
-        margin: 0;
-    }
-
-    .product-list .product-list-item > section > .counters::after
-    {
-        content: '';
-        position: absolute;
-        display: block;
-        inline-size: 1px;
-        block-size: 100%;
-        left: 50%;
-        top: 0;
-        background-color: var(--plain-fg);
-    }
-
-    .product-list .product-list-item > section > a
-    {
-        display: grid;
-        grid-template-areas: 'icon';
-        grid-auto-flow: column;
-        justify-content: center;
-        gap: .5em;
-        padding: .25em 1em;
-        background-color: var(--primary-bg);
-        color: var(--primary-fg);
-        border: .1em solid transparent;
-        border-radius: var(--radius);
-        cursor: pointer;
-        line-height: 2em;
-        font-family: inherit;
-        font-size: 1em;
-        will-change: background-color;
-        transition: background-color .3s ease-in-out;
-    }
-
-    .product-list .product-list-item > section > button
-    {
-        font-size: 1.2em;
-    }
-
-    .product-list .product-list-item > section > footer
-    {
-        display: grid;
-        grid-auto-flow: column;
-        justify-content: end;
-    }
-
-    .product-list .product-list-item > section > footer button
-    {
-        background-color: transparent;
-        color: inherit;
-    }
-
-    @media (prefers-reduced-data: no-preference)
-    {
-        .product-list .product-list-item > img
-        {
-            background: #fff;
-        }
-
-        .product-list .product-list-item > section
-        {
-            background: linear-gradient(to top, var(--plain-bg) 50%, rgba(var(--plain-bg-rgb) / 0)),
-            var(--image) top center / cover no-repeat,
-            var(--plain-bg);
-        }
-    }
-
-    @media (hover: none)
-    {
-        .product-list > .inner
-        {
-            scroll-snap-type: x mandatory;
-        }
-
-        .product-list .product-list-item
-        {
-            scroll-snap-align: center;
-        }
-    }
-
     @media (hover)
     {
         .product-list > .inner
         {
             gap: var(--padding);
-        }
-
-        .product-list .product-list-item:not(:hover):not(:focus-within)
-        {
-            transform: translateY(0);
-            z-index: 0;
-            will-change: transform;
-        }
-
-        .product-list .product-list-item:not(:hover):not(:focus-within)::before
-        {
-            transform: translateY(0);
-            will-change: transform;
-        }
-
-        .product-list .product-list-item:not(:hover):not(:focus-within)::after
-        {
-            transform: translateX(0);
-            will-change: transform;
-        }
-
-        .product-list .product-list-item:not(:hover):not(:focus-within) > img
-        {
-            transform: scale(1) translateY(0);
-            will-change: transform;
-        }
-
-        .product-list .product-list-item:not(:hover):not(:focus-within) > section
-        {
-            clip-path: inset(40%);
-        }
-
-        @media (prefers-reduced-motion: no-preference)
-        {
-            .product-list .product-list-item
-            {
-                transition: transform .2s linear .1s, z-index 0s linear .2s;
-            }
-
-            .product-list .product-list-item::after
-            {
-                transition: transform .2s linear 0s;
-            }
-
-            .product-list .product-list-item > img
-            {
-                transition: transform .2s ease-in-out;
-            }
-
-            .product-list .product-list-item > section
-            {
-                transition: clip-path .3s ease-in-out .1s;
-            }
-
-            .product-list .product-list-item:is(:hover, :focus-within)
-            {
-                transition-delay: 0s, .3s;
-                z-index: 1;
-            }
-
-            .product-list .product-list-item:is(:hover, :focus-within)::after
-            {
-                transition-duration: .3s;
-                transition-delay: .1s;
-            }
-
-            .product-list .product-list-item:is(:hover, :focus-within) > img
-            {
-                transition-duration: .3s;
-            }
         }
     }
 }
@@ -341,12 +60,12 @@
     }
 
     .product-list .inner,
-    .product-list .product-list-item > section
+    .product-list app-product-list-item > section
     {
         display: contents;
     }
 
-    .product-list .product-list-item
+    .product-list app-product-list-item
     {
         display: grid;
         grid: 3em 1em / 5em auto;
@@ -357,22 +76,22 @@
         page-break-inside: avoid;
     }
 
-    .product-list .product-list-item:not(:first-of-type)
+    .product-list app-product-list-item:not(:first-of-type)
     {
         padding-block-start: 1em;
     }
 
-    .product-list .product-list-item:not(:last-of-type)
+    .product-list app-product-list-item:not(:last-of-type)
     {
         padding-block-end: 1em;
     }
 
-    .product-list .product-list-item::after
+    .product-list app-product-list-item::after
     {
         content: var(--origin) attr(href);
     }
 
-    .product-list .product-list-item > img
+    .product-list app-product-list-item > img
     {
         grid-area: 1 / 1 / -1 / 2;
         inline-size: 100%;
@@ -384,13 +103,13 @@
         object-fit: contain;
     }
 
-    .product-list .product-list-item .title
+    .product-list app-product-list-item .title
     {
         font-size: 1.2em;
         font-weight: bold;
     }
 
-    .product-list .product-list-item :is(.counters, button, footer)
+    .product-list app-product-list-item :is(.counters, button, footer)
     {
         display: none;
     }

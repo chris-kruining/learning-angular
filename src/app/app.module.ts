@@ -18,6 +18,7 @@ import { RouterModule } from '@angular/router';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+import { ItemComponent } from './product/list/item/item.component';
 
 @NgModule({
     imports: [
@@ -44,6 +45,7 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
         HomeComponent,
         MediaQueryDirective,
         PageNotFoundComponent,
+        ItemComponent,
     ],
     providers: [
         MediaQueryService,
