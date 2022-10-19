@@ -6,8 +6,6 @@ export class MediaQueryService implements OnDestroy
     #matches: boolean = true;
     #mediaQueryList?: MediaQueryList;
     readonly #onChange = (e: MediaQueryListEvent): void => {
-        console.log(e);
-
         this.#matches = e.matches;
     };
 

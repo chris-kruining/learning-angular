@@ -1,13 +1,13 @@
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { MediaQueryDirective } from '../directive/media-query.directive';
 import { MediaQueryService } from '../service/media-query.service';
 import { AppRoutingModule } from './app-routing.module';
 
 import { AppComponent } from './app.component';
-import { AppServerModule } from './app.server.module';
 import { CartComponent } from './cart/cart.component';
 import { HomeComponent } from './home/home.component';
 import { NavigationComponent } from './layout/navigation/navigation.component';
@@ -22,6 +22,7 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
 @NgModule({
     imports: [
         BrowserModule.withServerTransition({ appId: 'serverApp' }),
+        BrowserAnimationsModule,
         AppRoutingModule,
         ReactiveFormsModule,
         FontAwesomeModule,

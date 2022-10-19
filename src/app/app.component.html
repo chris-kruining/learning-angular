@@ -1,3 +1,5 @@
 <app-layout-navigation></app-layout-navigation>
 
-<router-outlet></router-outlet>
+<div [@routeAnimations]="prepareRoute()">
+    <router-outlet></router-outlet>
+</div>

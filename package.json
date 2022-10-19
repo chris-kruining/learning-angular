@@ -4,7 +4,7 @@
     "scripts": {
         "ng": "ng",
         "dev": "\"npm run watch\" \"npm run serve\"",
-        "serve": "http-server -p 4200 -c-1 dist/learning-angular/browser",
+        "serve": "http-server -p 4200 --proxy http://127.0.0.1:4200? -c-1 dist/learning-angular/browser",
         "build": "ng build --aot",
         "watch": "ng build --aot --watch --configuration development",
         "test": "ng test"

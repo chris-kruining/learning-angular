@@ -16,6 +16,11 @@
     grid-column: full;
 }
 
+:host > div
+{
+    position: relative;
+}
+
 router-outlet
 {
     display: none;
