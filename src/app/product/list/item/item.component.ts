@@ -20,7 +20,7 @@ import { Product } from '../../../product.service';
         trigger('addToCart', [
             transition('* => adding', [
                 sequence([
-                    animate('.8s ease-in-out', keyframes([
+                    animate('.5s ease-in-out', keyframes([
                         style({
                             position: 'fixed',
                             insetBlockStart: '{{ positionY }}px',
@@ -31,7 +31,7 @@ import { Product } from '../../../product.service';
                         }),
                         style({ insetBlockStart: '-100px', insetInlineStart: '100%', scale: .2, opacity: 0 })
                     ])),
-                    animate('.5s .8s ease-in-out', keyframes([
+                    animate('.3s .3s ease-in-out', keyframes([
                         style({
                             position: 'relative',
                             insetBlockStart: 'auto',
