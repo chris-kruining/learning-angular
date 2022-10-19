@@ -28,13 +28,13 @@
         position: relative;
         display: grid;
         grid-auto-flow: column;
-        grid: auto / repeat(auto-fill, 20em);
+        grid: auto / repeat(auto-fill, 15em);
         justify-content: center;
         align-items: start;
         justify-self: center;
         column-gap: calc(5 * var(--padding));
         inline-size: 100%;
-        padding-inline: calc(5 * var(--padding));
+        padding-inline: calc(2 * var(--padding));
         padding-block-start: calc(6 * var(--padding));
         padding-block-end: calc(4 * var(--padding));
         margin-inline: calc(-1 * var(--padding));

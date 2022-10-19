@@ -14,32 +14,10 @@
 
 @media screen
 {
-
-    .product-list
+    :host
     {
-        --padding: 2em;
-        --count: 20;
         display: grid;
-        pointer-events: none;
-    }
-
-    .product-list > .inner
-    {
-        position: relative;
-        display: grid;
-        grid-auto-flow: column;
-        grid: auto / repeat(auto-fill, 20em);
-        justify-content: center;
-        align-items: start;
-        justify-self: center;
-        column-gap: calc(5 * var(--padding));
-        inline-size: 100%;
-        padding-inline: calc(5 * var(--padding));
-        padding-block-start: calc(6 * var(--padding));
-        padding-block-end: calc(4 * var(--padding));
-        margin-inline: calc(-1 * var(--padding));
-        overflow-y: hidden;
-        pointer-events: auto;
+        place-content: center;
     }
 
     :host > a
@@ -50,6 +28,7 @@
         justify-items: center;
         position: relative;
         inline-size: 15em;
+        margin: 0;
         aspect-ratio: 3 / 5;
         transform: translateY(calc(-2 * var(--padding)));
         z-index: 1;
@@ -185,26 +164,6 @@
         left: 50%;
         top: 0;
         background-color: var(--plain-fg);
-    }
-
-    :host > a > section > a
-    {
-        display: grid;
-        grid-template-areas: 'icon';
-        grid-auto-flow: column;
-        justify-content: center;
-        gap: .5em;
-        padding: .25em 1em;
-        background-color: var(--primary-bg);
-        color: var(--primary-fg);
-        border: .1em solid transparent;
-        border-radius: var(--radius);
-        cursor: pointer;
-        line-height: 2em;
-        font-family: inherit;
-        font-size: 1em;
-        will-change: background-color;
-        transition: background-color .3s ease-in-out;
     }
 
     :host > a > section > button
