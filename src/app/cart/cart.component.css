@@ -1,0 +1,58 @@
+:host
+{
+    container: cart / inline-size;
+    display: block;
+}
+
+@media screen
+{
+    :host > .items
+    {
+        --padding: 2em;
+        display: grid;
+        gap: 3em;
+        padding-block: 3em;
+    }
+
+    :host > .items > app-product-list-item:hover
+    {
+        outline: 1px solid var(--plain-fg);
+        outline-offset: 1em;
+    }
+
+    :host > .items > app-product-list-item > footer
+    {
+        display: grid;
+        grid-auto-flow: column;
+        place-content: start;
+        gap: .5em;
+    }
+
+    :host > .items > app-product-list-item > footer input
+    {
+        min-inline-size: 0;
+    }
+
+
+    @container cart (inline-size <= 60em)
+    {
+        :host > .items
+        {
+            grid-template-columns: repeat(auto-fill, 10em);
+            justify-content: center;
+        }
+
+        :host > .items app-product-list-item::part(cover)::after
+        {
+            content: 'x' var(--quantity);
+            position: absolute;
+            inset-inline-end: 0;
+            inset-block-end: 0;
+            padding: .5em;
+            border-radius: .5em 0 .5em 0;
+            background-color: var(--primary-bg);
+            color: var(--primary-fg);
+            z-index: 1;
+        }
+    }
+}

@@ -1,5 +1,5 @@
 import { animate, keyframes, sequence, style, transition, trigger } from '@angular/animations';
-import { Component, ElementRef, Input, OnInit, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectorRef, Component, ElementRef, Input, OnInit, ViewEncapsulation } from '@angular/core';
 import { MediaQueryService } from '../../../../service/media-query.service';
 import { CartService } from '../../../cart.service';
 import { Product } from '../../../product.service';
@@ -72,7 +72,8 @@ export class ItemComponent implements OnInit
 
     get position()
     {
-        return this.elementRef.nativeElement.getBoundingClientRect();
+        const { x, y } = this.elementRef.nativeElement.getBoundingClientRect();
+        return { x, y };
     }
 
     ngOnInit(): void

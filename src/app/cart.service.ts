@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import observe, { IObservable } from '../observable';
 import { Product } from './product.service';
 
 export interface Item extends Product
@@ -6,55 +7,54 @@ export interface Item extends Product
     quantity: number;
 }
 
+interface Model
+{
+    items: Item[];
+}
+
 @Injectable({
     providedIn: 'root',
 })
 export class CartService
 {
-    #items: Item[] = [];
+    readonly #model: Model;
 
     constructor()
     {
-        this.#items = JSON.parse(sessionStorage.getItem('cart') ?? '[]') as Item[];
+        const observer = observe<Model>(JSON.parse(sessionStorage.getItem('cart') ?? '{ "items": [] }'));
+        observer.addEventListener('changed', e => {
+            sessionStorage.setItem('cart', JSON.stringify(this.#model));
+        });
+
+        this.#model = observer.get();
     }
 
     get items(): Item[]
     {
-        return this.#items;
+        return this.#model.items;
     }
 
     add(product: Product, quantity: number = 1)
     {
-        const existing = this.#items.find(p => p.id === product.id);
+        const existing = this.#model.items.find(p => p.id === product.id);
 
         if (existing === undefined)
         {
-            this.#items.push({ ...product, quantity });
+            this.#model.items.push({ ...product, quantity });
         }
         else
         {
             existing.quantity += quantity;
         }
-
-        this.#persist();
     }
 
     remove(id: Product['id']): void
     {
-        this.#items = this.#items.filter(p => p.id !== id);
-
-        this.#persist();
+        this.#model.items = this.#model.items.filter(p => p.id !== id);
     }
 
     clear(): void
     {
-        this.#items = [];
-
-        this.#persist();
-    }
-
-    #persist(): void
-    {
-        sessionStorage.setItem('cart', JSON.stringify(this.items));
+        this.#model.items = [];
     }
 }

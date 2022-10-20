@@ -38,4 +38,9 @@ export class CartComponent
 
         this.checkoutForm.reset();
     }
+
+    grabValue(e: any): number
+    {
+        return e.target.valueAsNumber;
+    }
 }

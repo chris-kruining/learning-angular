@@ -4,35 +4,17 @@
     [@addToCart]="{ value: state, params: { positionX: position.x, positionY: position.y } }"
     style="--price: '{{ product.price | currency }}'; --image: url({{ product.image }}); --origin: '{{ location.origin }}';"
 >
-    <img
-        [alt]="product.title"
-        [src]="showImage ? product.image : '#'"
-    />
+    <slot name="cover" part="cover" class="cover">
+        <img
+            class="default-image"
+            [alt]="product.title"
+            [src]="showImage ? product.image : '#'"
+        />
+    </slot>
 
     <section>
         <span class="title">{{ product.title }}</span>
 
-        <div class="counters">
-            <span class="value">{{ product.rating.rate }}</span>
-            <p>Rating</p>
-
-            <span class="value">{{ product.rating.count }}</span>
-            <p>Sold</p>
-        </div>
-
-        <button
-            (click)="addToCart(product); $event.preventDefault(); $event.stopPropagation();"
-            type="button"
-        >Buy
-        </button>
-
-        <footer (click)="$event.preventDefault(); $event.stopPropagation();">
-            <button (click)="share(product)">Share</button>
-
-            <app-product-alert
-                (notify)="onNotify($event)"
-                [product]="product"
-            ></app-product-alert>
-        </footer>
+        <slot></slot>
     </section>
 </a>

@@ -5,84 +5,50 @@
     initial-value: 2em;
 }
 
-@property --count
+:host
 {
-    syntax: '<integer>';
-    inherits: false;
-    initial-value: 20;
+    container: product-list-item / inline-size;
+    display: block;
 }
 
 @media screen
 {
-    :host
-    {
-        display: grid;
-        place-content: center;
-    }
-
     :host > a
     {
         display: grid;
-        grid: 100% / 100%;
-        align-items: start;
-        justify-items: center;
         position: relative;
-        inline-size: 15em;
-        margin: 0;
-        aspect-ratio: 3 / 5;
-        transform: translateY(calc(-2 * var(--padding)));
-        z-index: 1;
-        color: var(--plain-fg);
-    }
-
-    :host > a::before
-    {
-        content: '';
-        display: block;
-        position: absolute;
-        left: 0;
-        top: 0;
         inline-size: 100%;
-        block-size: 100%;
-        transform: translateY(calc(2 * var(--padding)));
-        z-index: -2;
+        color: var(--plain-fg);
     }
 
     :host > a::after
     {
         content: var(--price);
         display: grid;
-        place-items: center;
-        position: absolute;
-        right: calc(.5 * var(--padding));
-        top: 0;
-        inline-size: 5em;
-        aspect-ratio: 2 / 1.5;
-        padding-bottom: .25em;
         font-weight: 900;
-        background-color: var(--plain-bg);
-        transform: translateX(calc(1.5 * var(--padding)));
-        clip-path: polygon(0 0, 100% 0, 100% 100%, 50% calc(100% - .5em), 0 100%);
-        pointer-events: none;
-        z-index: 2;
     }
 
-    :host > a > img
+    :host > a .cover
     {
-        grid-area: 1 / 1;
+        display: block;
+        position: relative;
+        inline-size: 100%;
+        block-size: 100%;
+        border-radius: .5em;
+        box-shadow: 0 0 1em #000;
+    }
+
+    :host > a .default-image
+    {
+        position: relative;
         inline-size: 100%;
         block-size: 100%;
         padding: 1em;
         border-radius: .5em;
-        transform-origin: 50% 0;
-        box-shadow: 0 0 1em #000;
         object-fit: contain;
-        user-select: none;
-        transform: scale(.8) translateY(calc(-4 * var(--padding)));
-        z-index: 1;
     }
 
-    :host > a > img[alt]:after
+    :host > a .default-image[alt]:after
     {
         content: attr(alt);
         position: absolute;
@@ -106,27 +72,7 @@
 
     :host > a > section
     {
-        --offset: calc(1.5 * var(--padding));
-        grid-area: 1 / 1;
         display: grid;
-        grid-template-columns: 100%;
-        align-content: end;
-        gap: 1.5em;
-        position: relative;
-        inline-size: calc(100% + (3 * var(--padding)));
-        block-size: calc(100% + (4 * var(--padding)));
-        padding: calc(.5 * var(--padding));
-        background-color: var(--plain-bg);
-        border-radius: .5em;
-        transform: translate3d(0, 0, 0);
-        clip-path: inset(-1em);
-        box-shadow: 0 0 1em #000;
-    }
-
-    :host > a:focus-within > section
-    {
-        outline: 1px solid var(--plain-fg);
-        outline-offset: .75em;
     }
 
     :host > a > section > .title
@@ -136,57 +82,9 @@
         font-weight: bold;
     }
 
-    :host > a > section > .counters
-    {
-        position: relative;
-        column-count: 2;
-        text-align: center;
-        font-weight: bold;
-    }
-
-    :host > a > section > .counters > .value
-    {
-        font-size: 1.4em;
-    }
-
-    :host > a > section > .counters > :is(.value, p)
-    {
-        margin: 0;
-    }
-
-    :host > a > section > .counters::after
-    {
-        content: '';
-        position: absolute;
-        display: block;
-        inline-size: 1px;
-        block-size: 100%;
-        left: 50%;
-        top: 0;
-        background-color: var(--plain-fg);
-    }
-
-    :host > a > section > button
-    {
-        font-size: 1.2em;
-    }
-
-    :host > a > section > footer
-    {
-        display: grid;
-        grid-auto-flow: column;
-        justify-content: end;
-    }
-
-    :host > a > section > footer button
-    {
-        background-color: transparent;
-        color: inherit;
-    }
-
     @media (prefers-reduced-data: no-preference)
     {
-        :host > a > img
+        :host > a .default-image
         {
             background: #fff;
         }
@@ -199,24 +97,11 @@
         }
     }
 
-    @media (hover: none)
-    {
-        .product-list > .inner
-        {
-            scroll-snap-type: x mandatory;
-        }
-
-        :host > a
-        {
-            scroll-snap-align: center;
-        }
-    }
-
     @media (hover)
     {
-        .product-list > .inner
+        :host(:not(:hover):not(:focus-within))
         {
-            gap: var(--padding);
+            z-index: 0;
         }
 
         :host > a:not(:hover):not(:focus-within)
@@ -226,19 +111,13 @@
             will-change: transform;
         }
 
-        :host > a:not(:hover):not(:focus-within)::before
-        {
-            transform: translateY(0);
-            will-change: transform;
-        }
-
         :host > a:not(:hover):not(:focus-within)::after
         {
             transform: translateX(0);
             will-change: transform;
         }
 
-        :host > a:not(:hover):not(:focus-within) > img
+        :host > a:not(:hover):not(:focus-within) .cover
         {
             transform: scale(1) translateY(0);
             will-change: transform;
@@ -251,9 +130,14 @@
 
         @media (prefers-reduced-motion: no-preference)
         {
+            :host
+            {
+                transition: z-index 0s linear .2s;
+            }
+
             :host > a
             {
-                transition: transform .2s linear .1s, z-index 0s linear .2s;
+                transition: transform .2s linear .1s;
             }
 
             :host > a::after
@@ -261,7 +145,7 @@
                 transition: transform .2s linear 0s;
             }
 
-            :host > a > img
+            :host > a .cover
             {
                 transition: transform .2s ease-in-out;
             }
@@ -274,7 +158,16 @@
             :host > a:is(:hover, :focus-within)
             {
                 transition-delay: 0s, .3s;
+            }
+
+            :host(:focus-within)
+            {
                 z-index: 1;
+            }
+
+            :host(:hover)
+            {
+                z-index: 2;
             }
 
             :host > a:is(:hover, :focus-within)::after
@@ -283,9 +176,117 @@
                 transition-delay: .1s;
             }
 
-            :host > a:is(:hover, :focus-within) > img
+            :host > a:is(:hover, :focus-within) .cover
             {
                 transition-duration: .3s;
+            }
+        }
+    }
+
+    @container product-list-item (inline-size <= 50em)
+    {
+        @media screen
+        {
+            :host > a
+            {
+                grid: 100% / 100%;
+                align-items: start;
+                justify-items: center;
+                aspect-ratio: 3 / 5;
+                transform: translateY(calc(-2 * var(--padding)));
+            }
+
+            :host > a::after
+            {
+                position: absolute;
+                right: calc(.5 * var(--padding));
+                top: 0;
+                place-items: center;
+                inline-size: 5em;
+                aspect-ratio: 2 / 1.5;
+                padding-bottom: .25em;
+                background-color: var(--plain-bg);
+                transform: translateX(calc(1.5 * var(--padding)));
+                clip-path: polygon(0 0, 100% 0, 100% 100%, 50% calc(100% - .5em), 0 100%);
+                pointer-events: none;
+                z-index: 2;
+            }
+
+            :host > a .cover
+            {
+                grid-area: 1 / 1;
+                transform-origin: 50% 0;
+                user-select: none;
+                transform: scale(.8) translateY(calc(-4 * var(--padding)));
+                z-index: 1;
+            }
+
+            :host > a > section
+            {
+                --offset: calc(1.5 * var(--padding));
+                grid-area: 1 / 1;
+                grid-template-columns: 100%;
+                align-content: end;
+                gap: 1.5em;
+                position: relative;
+                inline-size: calc(100% + (3 * var(--padding)));
+                block-size: calc(100% + (4 * var(--padding)));
+                padding: calc(.5 * var(--padding));
+                background-color: var(--plain-bg);
+                border-radius: .5em;
+                transform: translate3d(0, 0, 0);
+                clip-path: inset(-1em);
+                box-shadow: 0 0 1em #000;
+            }
+
+            :host > a:focus-within > section
+            {
+                outline: 1px solid var(--plain-fg);
+                outline-offset: .75em;
+            }
+        }
+    }
+
+    @container product-list-item (inline-size > 50em)
+    {
+        @media screen
+        {
+            :host > a
+            {
+                grid: 3em 1em / 5em 40em;
+                grid-auto-columns: 1fr;
+                grid-auto-flow: column;
+                gap: 1em 2em;
+            }
+
+            :host > a .default-image
+            {
+                grid-area: 1 / 1 / -1 / 2;
+            }
+
+            :host > a::after
+            {
+                grid-area: 2 / 2;
+            }
+
+            :host > a > section
+            {
+                display: contents;
+            }
+
+            :host > a > section > .title
+            {
+                grid-area: 1 / 2;
+            }
+
+            :host > a > section > *:not(.title)
+            {
+                grid-row: span 2;
+            }
+
+            :host > a > section > footer
+            {
+                display: contents;
             }
         }
     }

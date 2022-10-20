@@ -6,7 +6,7 @@
         --plain-fg-rgb: 34 34 34;
 
         --primary-bg-rgb: 65 112 129;
-        --primary-fg-rgb: 34 34 34;
+        --primary-fg-rgb: 255 255 250;
     }
 
     @media screen and (prefers-contrast: more)
@@ -42,7 +42,7 @@
         --plain-fg-rgb: 255 255 250;
 
         --primary-bg-rgb: 65 112 129;
-        --primary-fg-rgb: 34 34 34;
+        --primary-fg-rgb: 255 255 250;
     }
 
     @media (prefers-contrast: more)

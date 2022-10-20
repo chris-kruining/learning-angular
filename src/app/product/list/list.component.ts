@@ -17,9 +17,11 @@ import { Product, ProductService } from '../../product.service';
 export class ListComponent implements OnInit
 {
     products: Product[] = [];
+    viewMode = sessionStorage.getItem('app-product-list-view-mode') ?? 'grid';
 
     constructor(
         private productService: ProductService,
+        private cartService: CartService,
         private mediaQueryService: MediaQueryService,
     )
     {
@@ -38,5 +40,28 @@ export class ListComponent implements OnInit
     public async ngOnInit(): Promise<void>
     {
         this.products = await this.productService.products;
+    }
+
+    toggleView()
+    {
+        this.viewMode = this.viewMode === 'grid' ? 'list' : 'grid';
+
+        sessionStorage.setItem('app-product-list-view-mode', this.viewMode);
+        console.log(this.viewMode);
+    }
+
+    share(product: Product)
+    {
+        window.alert(`${product.title} has been shared!`);
+    }
+
+    onNotify(product: Product)
+    {
+        window.alert(`You will be notified when ${product.title} goes on sale`);
+    }
+
+    async addToCart(product: Product)
+    {
+        this.cartService.add(product);
     }
 }

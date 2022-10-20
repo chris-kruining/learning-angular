@@ -1,10 +1,3 @@
-@property --padding
-{
-    syntax: '<length>';
-    inherits: false;
-    initial-value: 2em;
-}
-
 @property --count
 {
     syntax: '<integer>';
@@ -14,32 +7,87 @@
 
 @media screen
 {
-
     .product-list
     {
         --padding: 2em;
         --count: 20;
         display: grid;
-        pointer-events: none;
     }
 
     .product-list > .inner
     {
         position: relative;
         display: grid;
-        grid-auto-flow: column;
+        align-items: start;
+        inline-size: 100%;
+    }
+
+    .product-list > .inner.mode-grid
+    {
         grid: auto / repeat(auto-fill, 15em);
         justify-content: center;
-        align-items: start;
         justify-self: center;
         column-gap: calc(5 * var(--padding));
-        inline-size: 100%;
         padding-inline: calc(2 * var(--padding));
         padding-block-start: calc(6 * var(--padding));
         padding-block-end: calc(4 * var(--padding));
         margin-inline: calc(-1 * var(--padding));
-        overflow-y: hidden;
-        pointer-events: auto;
+    }
+
+    .product-list > .inner.mode-list
+    {
+        grid-template-columns: 100%;
+        grid-auto-flow: row;
+        gap: var(--padding);
+        padding-block: var(--padding);
+    }
+
+    app-product-list-item > .counters
+    {
+        position: relative;
+        column-count: 2;
+        text-align: center;
+        font-weight: bold;
+    }
+
+    app-product-list-item > .counters > .value
+    {
+        font-size: 1.4em;
+    }
+
+    app-product-list-item > .counters > :is(.value, p)
+    {
+        margin: 0;
+    }
+
+    app-product-list-item > .counters::after
+    {
+        content: '';
+        position: absolute;
+        display: block;
+        inline-size: 1px;
+        block-size: 100%;
+        left: 50%;
+        top: 0;
+        background-color: var(--plain-fg);
+    }
+
+    app-product-list-item > button
+    {
+        font-size: 1.2em;
+    }
+
+    app-product-list-item > footer
+    {
+        display: grid;
+        grid-auto-flow: column;
+        justify-content: end;
+    }
+
+    app-product-list-item > footer button
+    {
+        background-color: transparent;
+        color: inherit;
     }
 
     @media (hover)
@@ -53,64 +101,64 @@
 
 @media print
 {
-    .product-list
-    {
-        display: block;
-        padding: 2em;
-    }
+    /*.product-list*/
+    /*{*/
+    /*    display: block;*/
+    /*    padding: 2em;*/
+    /*}*/
 
-    .product-list .inner,
-    .product-list app-product-list-item > section
-    {
-        display: contents;
-    }
+    /*.product-list .inner,*/
+    /*.product-list app-product-list-item > section*/
+    /*{*/
+    /*    display: contents;*/
+    /*}*/
 
-    .product-list app-product-list-item
-    {
-        display: grid;
-        grid: 3em 1em / 5em auto;
-        place-content: start;
-        align-items: center;
-        gap: 1em 2em;
-        inline-size: 100%;
-        page-break-inside: avoid;
-    }
+    /*.product-list app-product-list-item*/
+    /*{*/
+    /*    display: grid;*/
+    /*    grid: 3em 1em / 5em auto;*/
+    /*    place-content: start;*/
+    /*    align-items: center;*/
+    /*    gap: 1em 2em;*/
+    /*    inline-size: 100%;*/
+    /*    page-break-inside: avoid;*/
+    /*}*/
 
-    .product-list app-product-list-item:not(:first-of-type)
-    {
-        padding-block-start: 1em;
-    }
+    /*.product-list app-product-list-item:not(:first-of-type)*/
+    /*{*/
+    /*    padding-block-start: 1em;*/
+    /*}*/
 
-    .product-list app-product-list-item:not(:last-of-type)
-    {
-        padding-block-end: 1em;
-    }
+    /*.product-list app-product-list-item:not(:last-of-type)*/
+    /*{*/
+    /*    padding-block-end: 1em;*/
+    /*}*/
 
-    .product-list app-product-list-item::after
-    {
-        content: var(--origin) attr(href);
-    }
+    /*.product-list app-product-list-item::after*/
+    /*{*/
+    /*    content: var(--origin) attr(href);*/
+    /*}*/
 
-    .product-list app-product-list-item > img
-    {
-        grid-area: 1 / 1 / -1 / 2;
-        inline-size: 100%;
-        block-size: 100%;
-        padding: .5em;
-        background-color: #fff;
-        box-shadow: 0 0 .5em #0003;
-        border-radius: var(--radius);
-        object-fit: contain;
-    }
+    /*.product-list app-product-list-item > img*/
+    /*{*/
+    /*    grid-area: 1 / 1 / -1 / 2;*/
+    /*    inline-size: 100%;*/
+    /*    block-size: 100%;*/
+    /*    padding: .5em;*/
+    /*    background-color: #fff;*/
+    /*    box-shadow: 0 0 .5em #0003;*/
+    /*    border-radius: var(--radius);*/
+    /*    object-fit: contain;*/
+    /*}*/
 
-    .product-list app-product-list-item .title
-    {
-        font-size: 1.2em;
-        font-weight: bold;
-    }
+    /*.product-list app-product-list-item .title*/
+    /*{*/
+    /*    font-size: 1.2em;*/
+    /*    font-weight: bold;*/
+    /*}*/
 
-    .product-list app-product-list-item :is(.counters, button, footer)
-    {
-        display: none;
-    }
+    /*.product-list app-product-list-item :is(.counters, button, footer)*/
+    /*{*/
+    /*    display: none;*/
+    /*}*/
 }

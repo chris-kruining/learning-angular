@@ -1,5 +1,31 @@
 <main class="product-list">
-    <div class="inner">
-        <app-product-list-item *ngFor="let product of products" [product]="product"></app-product-list-item>
+    <button (click)="toggleView()">toggle view</button>
+
+    <div class="inner" [class]="'mode-' + viewMode">
+        <app-product-list-item *ngFor="let product of products" [product]="product">
+            <div class="counters">
+                <span class="value">{{ product.rating.rate }}</span>
+                <p>Rating</p>
+
+                <span class="value">{{ product.rating.count }}</span>
+                <p>Sold</p>
+            </div>
+
+            <button
+                (click)="addToCart(product); $event.preventDefault(); $event.stopPropagation();"
+                type="button"
+            >
+                Buy
+            </button>
+
+            <footer (click)="$event.preventDefault(); $event.stopPropagation();">
+                <button (click)="share(product)">Share</button>
+
+                <app-product-alert
+                    (notify)="onNotify($event)"
+                    [product]="product"
+                ></app-product-alert>
+            </footer>
+        </app-product-list-item>
     </div>
 </main>
